@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bubby Reva's Birthday Kitchen!</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-heading: 'Fredoka', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+    }
+    body {
+      font-family: var(--font-body);
+      background: radial-gradient(circle at 50% 20%, #fff9ec 0%, #fde6c4 55%, #f7d4a8 100%);
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    h1, h2, h3, .font-display {
+      font-family: var(--font-heading);
+    }
+
+    /* Subtle Kitchen Tile Pattern */
+    .kitchen-wall {
+      background-color: #f4f9ff;
+      background-image: 
+        linear-gradient(to right, rgba(147, 197, 253, 0.22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(147, 197, 253, 0.22) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Character Animations */
+    .reva-breathe {
+      transform-origin: 200px 270px;
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-4px) rotate(0.6deg); }
+    }
+
+    .reva-bounce {
+      animation: actionBounce 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    @keyframes actionBounce {
+      0% { transform: scale(1) translateY(0); }
+      35% { transform: scale(1.07, 0.93) translateY(6px); }
+      70% { transform: scale(0.96, 1.06) translateY(-10px) rotate(-2deg); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    #ladleArm {
+      transform-origin: 142px 178px;
+      transition: transform 0.2s ease;
+    }
+    .stir-anim #ladleArm {
+      animation: ladleStir 0.52s ease-in-out;
+    }
+    @keyframes ladleStir {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-28deg) translate(-6px, -4px); }
+      60% { transform: rotate(18deg) translate(6px, 2px); }
+    }
+    .toss-anim #ladleArm {
+      animation: ladleToss 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes ladleToss {
+      0%, 100% { transform: rotate(0deg); }
+      45% { transform: rotate(-34deg) translateY(-6px); }
+    }
+
+    /* Blinking Eyelids */
+    .eyelid {
+      transform-origin: center;
+      animation: blinkEyes 4.2s infinite;
+    }
+    @keyframes blinkEyes {
+      0%, 94%, 98%, 100% { transform: scaleY(0); }
+      96% { transform: scaleY(1); }
+    }
+
+    /* Boiling Pot Steam */
+    .steam-puff {
+      animation: steamRise 2.2s ease-out infinite;
+      transform-origin: center;
+    }
+    .steam-puff:nth-child(2) { animation-delay: 0.7s; }
+    .steam-puff:nth-child(3) { animation-delay: 1.4s; }
+    @keyframes steamRise {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      40% { opacity: 0.75; }
+      100% { transform: translateY(-34px) scale(1.35); opacity: 0; }
+    }
+
+    /* Kid Avatar Bounce */
+    .kid-pop {
+      animation: kidEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes kidEnter {
+      0% { transform: scale(0.7) translateY(15px); opacity: 0.3; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* Tactile 3D Buttons */
+    .btn-3d-amber {
+      background: linear-gradient(180deg, #ffb74d 0%, #f57c00 100%);
+      box-shadow: 0 6px 0 #b25600, 0 10px 20px rgba(245, 124, 0, 0.3);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+    }
+    .btn-3d-amber:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #b25600, 0 4px 10px rgba(245, 124, 0, 0.25);
+    }
+
+    .btn-3d-red {
+      background: linear-gradient(180deg, #ff6b6b 0%, #e03131 100%);
+      box-shadow: 0 6px 0 #9c1919, 0 10px 20px rgba(224, 49, 49, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+    }
+    .btn-3d-red:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #9c1919, 0 4px 10px rgba(224, 49, 49, 0.25);
+    }
+
+    .glow-urgent {
+      animation: urgentPulse 0.85s ease-in-out infinite alternate;
+    }
+    @keyframes urgentPulse {
+      0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(224, 49, 49, 0)); }
+      100% { transform: scale(1.045); filter: drop-shadow(0 0 14px rgba(255, 82, 82, 0.75)); }
+    }
+
+    /* Candle Flame Flicker */
+    .candle-flame {
+      transform-origin: 50% 90%;
+      animation: flicker 0.55s ease-in-out infinite alternate;
+      cursor: pointer;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-3deg); }
+      50% { transform: scale(1.08, 0.94) rotate(2deg); }
+      100% { transform: scale(0.95, 1.08) rotate(4deg); }
+    }
+
+    /* Floating Balloons */
+    .balloon-float {
+      animation: floatBalloon 3.2s ease-in-out infinite alternate;
+      cursor: pointer;
+    }
+    @keyframes floatBalloon {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      100% { transform: translateY(-14px) rotate(3deg); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4 relative">
+
+  <!-- Full-screen Particle & Flying Treats Canvas Overlay -->
+  <canvas id="fxCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+
+  <!-- Main Game Card Container -->
+  <main id="gameWrapper" class="w-full max-w-xl bg-white rounded-3xl shadow-2xl border-4 border-blue-500 overflow-hidden relative z-10 transition-all duration-300">
+    
+    <!-- Top Header Bar -->
+    <header class="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white px-4 py-3 flex items-center justify-between shadow-md">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl sm:text-3xl animate-bounce">🎂</span>
+        <div>
+          <h1 class="text-lg sm:text-2xl font-bold tracking-wide leading-tight">Bubby Reva's Birthday Kitchen!</h1>
+          <p class="text-xs text-blue-100 font-medium">Feed the hungry kids Mandelbread & Bubby Chicken!</p>
+        </div>
+      </div>
+
+      <!-- Header Action Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Share Link Button -->
+        <button id="shareLinkBtn" onclick="shareKitchenLink()" aria-label="Share Link"
+          class="bg-white/20 hover:bg-white/30 active:scale-95 text-white px-2.5 sm:px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 backdrop-blur-sm transition">
+          <span id="shareIcon">🔗</span>
+          <span id="shareLabel" class="hidden sm:inline">Share</span>
+        </button>
+
+        <!-- Sound Toggle Button -->
+        <button id="soundToggleBtn" onclick="toggleSound()" aria-label="Toggle Sound"
+          class="bg-white/20 hover:bg-white/30 active:scale-95 text-white px-2.5 sm:px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 backdrop-blur-sm transition">
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel" class="hidden sm:inline">Sound On</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Share Feedback Notification Toast -->
+    <div id="shareToast" class="hidden bg-emerald-600 text-white text-xs font-bold px-4 py-1.5 text-center transition-all duration-200">
+      Link copied to clipboard! Share the love with family 💖
+    </div>
+
+    <!-- Bubby Love Meter (Progress Bar) -->
+    <div class="bg-amber-50 px-4 py-2.5 border-b-2 border-amber-200">
+      <div class="flex justify-between items-center text-xs sm:text-sm font-extrabold text-amber-900 mb-1">
+        <span class="flex items-center gap-1">💛 BUBBY LOVE METER</span>
+        <span id="scoreText" class="bg-amber-200/80 px-2.5 py-0.5 rounded-full text-amber-950">0 / 20 Happy Tummies</span>
+      </div>
+      <div class="w-full h-5 bg-amber-200/70 rounded-full overflow-hidden p-0.5 shadow-inner">
+        <div id="progressBar" class="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 rounded-full transition-all duration-300 flex items-center justify-end pr-2 text-[11px] font-bold text-white" style="width: 0%;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Kitchen Stage -->
+    <section class="kitchen-wall relative pt-3 pb-1 px-3 flex flex-col items-center overflow-hidden">
+      
+      <!-- Decorative Kitchen Window & Pennants -->
+      <div class="w-full flex justify-between items-start px-2 mb-1 pointer-events-none">
+        <svg class="w-28 h-8 opacity-85" viewBox="0 0 120 35">
+          <path d="M0,5 Q60,18 120,2" fill="none" stroke="#94a3b8" stroke-width="2"/>
+          <polygon points="10,7 26,10 16,28" fill="#f59e0b"/>
+          <polygon points="36,11 52,12 43,30" fill="#ec4899"/>
+          <polygon points="62,12 78,11 71,30" fill="#3b82f6"/>
+          <polygon points="88,10 104,6 98,26" fill="#10b981"/>
+        </svg>
+        <div class="bg-white/90 border border-blue-200 rounded-xl px-2.5 py-1 text-[11px] font-bold text-blue-800 shadow-sm">
+          ✨ Tap buttons or tap the food!
+        </div>
+      </div>
+
+      <!-- Hungry Kids Queue & Craving Speech Bubble -->
+      <div id="kidZone" onclick="handleKidTap()" class="w-full max-w-md bg-white/95 border-2 border-amber-300 rounded-2xl p-2.5 shadow-md flex items-center gap-3 cursor-pointer hover:border-amber-400 transition relative z-20 mb-1">
+        <!-- Animated Kid Avatar -->
+        <div id="kidAvatarBox" class="kid-pop w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 border-2 border-amber-300 flex flex-col items-center justify-center shrink-0 relative shadow-sm">
+          <span id="kidEmoji" class="text-3xl sm:text-4xl leading-none">👧</span>
+          <span id="kidName" class="text-[10px] font-extrabold text-amber-900 mt-0.5">Aliza</span>
+          <!-- Craving Badge -->
+          <span id="cravingBadge" class="absolute -top-2 -right-2 bg-amber-500 text-white text-sm w-7 h-7 rounded-full flex items-center justify-center shadow border-2 border-white animate-bounce">
+            🥖
+          </span>
+        </div>
+
+        <!-- Speech Bubble Content -->
+        <div class="flex-1 text-left">
+          <div class="flex items-center gap-1.5 mb-0.5">
+            <span id="cravingTag" class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+              Craving Mandelbread
+            </span>
+          </div>
+          <p id="speechText" class="text-xs sm:text-sm font-bold text-slate-800 leading-snug">
+            "Bubby! Can you make us your famous Mandelbread?"
+          </p>
+        </div>
+      </div>
+
+      <!-- Animated SVG Character: Bubby Reva & Her Kitchen Counter -->
+      <div class="relative w-full max-w-[400px] h-[250px] sm:h-[270px] flex items-center justify-center select-none">
+        <svg id="revaSceneSvg" viewBox="0 0 400 280" class="w-full h-full overflow-visible">
+          <defs>
+            <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#1e293b" flood-opacity="0.14"/>
+            </filter>
+            <linearGradient id="potGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#94a3b8"/>
+              <stop offset="35%" stop-color="#e2e8f0"/>
+              <stop offset="70%" stop-color="#cbd5e1"/>
+              <stop offset="100%" stop-color="#64748b"/>
+            </linearGradient>
+            <radialGradient id="brothGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fde047"/>
+              <stop offset="75%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </radialGradient>
+          </defs>
+
+          <!-- BUBBY REVA CHARACTER GROUP -->
+          <g id="revaCharacter" class="reva-breathe" filter="url(#softShadow)">
+            <!-- Fluffy Curly Silver Hair (Back Layer) -->
+            <g fill="#bfc5cc" stroke="#8d959e" stroke-width="1.6">
+              <circle cx="158" cy="68" r="22"/>
+              <circle cx="145" cy="90" r="20"/>
+              <circle cx="148" cy="114" r="18"/>
+              <circle cx="176" cy="52" r="24"/>
+              <circle cx="202" cy="48" r="25"/>
+              <circle cx="228" cy="52" r="24"/>
+              <circle cx="246" cy="68" r="22"/>
+              <circle cx="256" cy="90" r="20"/>
+              <circle cx="252" cy="114" r="18"/>
+            </g>
+
+            <!-- Soft Silver Hair Curls (Mid Highlight Layer) -->
+            <g fill="#e2e6ea" stroke="#a6aeb7" stroke-width="1.3">
+              <circle cx="166" cy="59" r="16"/>
+              <circle cx="188" cy="49" r="18"/>
+              <circle cx="214" cy="49" r="18"/>
+              <circle cx="236" cy="59" r="16"/>
+              <circle cx="152" cy="80" r="15"/>
+              <circle cx="248" cy="80" r="15"/>
+              <circle cx="154" cy="102" r="13"/>
+              <circle cx="246" cy="102" r="13"/>
+            </g>
+
+            <!-- White Top with Blue Florals -->
+            <path d="M134,155 Q200,140 266,155 L282,235 L118,235 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2.2"/>
+            
+            <g opacity="0.9">
+              <!-- Green Leaves -->
+              <g fill="#4d7c5d">
+                <ellipse cx="164" cy="182" rx="8" ry="4" transform="rotate(28 164 182)"/>
+                <ellipse cx="152" cy="190" rx="7" ry="3.5" transform="rotate(-20 152 190)"/>
+                <ellipse cx="236" cy="178" rx="8" ry="4" transform="rotate(-32 236 178)"/>
+                <ellipse cx="206" cy="208" rx="8" ry="4" transform="rotate(18 206 208)"/>
+                <ellipse cx="180" cy="216" rx="7" ry="3.5" transform="rotate(-25 180 216)"/>
+                <ellipse cx="248" cy="212" rx="8" ry="4" transform="rotate(22 248 212)"/>
+              </g>
+              <!-- Blue Flowers -->
+              <g>
+                <circle cx="158" cy="184" r="9" fill="#2563eb"/>
+                <circle cx="163" cy="179" r="6" fill="#60a5fa"/>
+                <circle cx="158" cy="184" r="3" fill="#1e3a8a"/>
+                <circle cx="230" cy="182" r="10" fill="#1d4ed8"/>
+                <circle cx="225" cy="187" r="6" fill="#93c5fd"/>
+                <circle cx="230" cy="182" r="3.5" fill="#1e3a8a"/>
+                <circle cx="195" cy="204" r="9.5" fill="#2563eb"/>
+                <circle cx="200" cy="199" r="6" fill="#60a5fa"/>
+                <circle cx="195" cy="204" r="3" fill="#1e3a8a"/>
+                <circle cx="146" cy="214" r="8" fill="#3b82f6"/>
+                <circle cx="150" cy="210" r="5" fill="#93c5fd"/>
+                <circle cx="242" cy="214" r="9" fill="#1d4ed8"/>
+                <circle cx="237" cy="210" r="5.5" fill="#60a5fa"/>
+                <circle cx="172" cy="222" r="7.5" fill="#2563eb"/>
+                <circle cx="218" cy="224" r="8" fill="#3b82f6"/>
+              </g>
+            </g>
+
+            <!-- Neck & Collar -->
+            <path d="M178,148 L200,180 L222,148 Z" fill="#f4cbb2" stroke="#dfa88a" stroke-width="2"/>
+            <path d="M174,149 L200,184 L226,149" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+
+            <!-- Left Arm Resting on Hip with Watch -->
+            <g>
+              <path d="M262,162 Q296,184 272,218" fill="none" stroke="#f4cbb2" stroke-width="18" stroke-linecap="round"/>
+              <path d="M254,153 Q280,164 278,184 L256,190 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/>
+              <circle cx="267" cy="172" r="6.5" fill="#2563eb"/>
+              <circle cx="271" cy="169" r="4" fill="#60a5fa"/>
+              <g transform="rotate(-28 275 208)">
+                <rect x="265" y="204" width="20" height="7" rx="2.5" fill="#334155"/>
+                <circle cx="275" cy="207.5" r="6" fill="#fefce8" stroke="#94a3b8" stroke-width="1.8"/>
+                <line x1="275" y1="207.5" x2="275" y2="204" stroke="#1e293b" stroke-width="1.2"/>
+                <line x1="275" y1="207.5" x2="278" y2="207.5" stroke="#1e293b" stroke-width="1.2"/>
+              </g>
+            </g>
+
+            <!-- Right Arm Holding Ladle -->
+            <g id="ladleArm">
+              <path d="M142,162 Q108,148 96,118" fill="none" stroke="#f4cbb2" stroke-width="18" stroke-linecap="round"/>
+              <path d="M148,153 Q122,158 118,178 L142,184 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8"/>
+              <circle cx="131" cy="169" r="6.5" fill="#1d4ed8"/>
+              <circle cx="135" cy="166" r="4" fill="#93c5fd"/>
+              <path d="M97,132 L111,126" stroke="#94a3b8" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="104" cy="129" r="2.2" fill="#e2e8f0"/>
+              <circle cx="94" cy="112" r="11" fill="#f4cbb2" stroke="#dfa88a" stroke-width="1.8"/>
+              <line x1="94" y1="108" x2="94" y2="192" stroke="#94a3b8" stroke-width="6" stroke-linecap="round"/>
+              <line x1="92.5" y1="108" x2="92.5" y2="192" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round"/>
+              <path d="M74,188 Q94,216 114,188 Z" fill="url(#potGrad)" stroke="#64748b" stroke-width="2"/>
+              <ellipse cx="94" cy="188" rx="18" ry="6.5" fill="#f59e0b"/>
+              <circle cx="89" cy="187" r="3.5" fill="#fde047"/>
+              <circle cx="99" cy="188" r="3.5" fill="#fde047"/>
+            </g>
+
+            <!-- Head & Warm Expressive Face -->
+            <rect x="188" y="132" width="24" height="24" rx="10" fill="#f4cbb2"/>
+            <ellipse cx="200" cy="100" rx="39" ry="44" fill="#f9d8c2" stroke="#dfa88a" stroke-width="1.8"/>
+            <circle cx="160" cy="109" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+            <circle cx="240" cy="109" r="4" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+            <ellipse cx="173" cy="110" rx="9.5" ry="6" fill="#fb7185" opacity="0.38"/>
+            <ellipse cx="227" cy="110" rx="9.5" ry="6" fill="#fb7185" opacity="0.38"/>
+
+            <!-- Eyebrows -->
+            <path d="M170,79 Q181,71 191,77" fill="none" stroke="#78716c" stroke-width="3" stroke-linecap="round"/>
+            <path d="M209,77 Q219,71 230,79" fill="none" stroke="#78716c" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Twinkling Eyes -->
+            <g>
+              <ellipse cx="181" cy="91" rx="6" ry="6.5" fill="#ffffff" stroke="#64748b" stroke-width="1.2"/>
+              <ellipse cx="219" cy="91" rx="6" ry="6.5" fill="#ffffff" stroke="#64748b" stroke-width="1.2"/>
+              <circle cx="181" cy="91" r="3.6" fill="#475569"/>
+              <circle cx="219" cy="91" r="3.6" fill="#475569"/>
+              <circle cx="181" cy="91" r="1.8" fill="#0f172a"/>
+              <circle cx="219" cy="91" r="1.8" fill="#0f172a"/>
+              <circle cx="179.5" cy="89" r="1.6" fill="#ffffff"/>
+              <circle cx="217.5" cy="89" r="1.6" fill="#ffffff"/>
+              <ellipse class="eyelid" cx="181" cy="91" rx="6.5" ry="7" fill="#f9d8c2"/>
+              <ellipse class="eyelid" cx="219" cy="91" rx="6.5" ry="7" fill="#f9d8c2"/>
+            </g>
+
+            <!-- Smile -->
+            <path d="M200,90 Q194,104 203,107" fill="none" stroke="#d09474" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M172,113 Q166,120 170,127" fill="none" stroke="#dfa88a" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M228,113 Q234,120 230,127" fill="none" stroke="#dfa88a" stroke-width="1.8" stroke-linecap="round"/>
+            <path id="revaMouth" d="M180,116 Q200,122 220,116 Q216,136 200,136 Q184,136 180,116 Z" fill="#be123c" stroke="#881337" stroke-width="1.8"/>
+            <path d="M184,117 Q200,121 216,117 L214,122 Q200,125 186,122 Z" fill="#ffffff"/>
+            <path d="M189,130 Q200,125 211,130 Q206,135 200,135 Q194,135 189,130 Z" fill="#fb7185"/>
+
+            <!-- Curly Bangs -->
+            <g fill="#e5e9ed" stroke="#9aa1a9" stroke-width="1.3">
+              <circle cx="171" cy="61" r="11"/>
+              <circle cx="186" cy="57" r="12"/>
+              <circle cx="202" cy="56" r="12"/>
+              <circle cx="217" cy="57" r="12"/>
+              <circle cx="231" cy="61" r="11"/>
+              <path d="M175,65 Q180,73 187,68" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M212,67 Q219,73 225,65" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+          </g>
+
+          <!-- FOREGROUND KITCHEN COUNTER & FOOD -->
+          <rect x="8" y="226" width="384" height="46" rx="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2.5"/>
+          <line x1="16" y1="234" x2="384" y2="234" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- LEFT: Pot (Bubby Chicken) -->
+          <g id="potGroup" onclick="serveChicken(event)" class="cursor-pointer hover:brightness-105 transition">
+            <g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.75">
+              <path class="steam-puff" d="M68,175 Q62,162 72,150 Q80,140 70,128"/>
+              <path class="steam-puff" d="M95,172 Q103,158 93,146 Q85,136 96,124"/>
+              <path class="steam-puff" d="M120,176 Q114,164 124,152 Q130,142 122,132"/>
+            </g>
+            <path d="M36,198 L22,198 L22,212 L36,212" fill="none" stroke="#475569" stroke-width="4.5" stroke-linejoin="round"/>
+            <path d="M154,198 L168,198 L168,212 L154,212" fill="none" stroke="#475569" stroke-width="4.5" stroke-linejoin="round"/>
+            <rect x="35" y="182" width="120" height="58" rx="10" fill="url(#potGrad)" stroke="#475569" stroke-width="2.2"/>
+            <ellipse cx="95" cy="182" rx="60" ry="12" fill="#cbd5e1" stroke="#475569" stroke-width="2.2"/>
+            <ellipse cx="95" cy="183" rx="53" ry="9" fill="url(#brothGrad)"/>
+            <g transform="translate(65, 174) rotate(-14)">
+              <ellipse cx="14" cy="7" rx="12" ry="7" fill="#d97706" stroke="#92400e" stroke-width="1.5"/>
+              <rect x="24" y="5" width="10" height="4" rx="2" fill="#fef3c7"/>
+            </g>
+            <g transform="translate(102, 173) rotate(12)">
+              <ellipse cx="12" cy="7" rx="11" ry="6.5" fill="#d97706" stroke="#92400e" stroke-width="1.5"/>
+              <rect x="-6" y="5" width="10" height="4" rx="2" fill="#fef3c7"/>
+            </g>
+            <rect x="53" y="206" width="84" height="20" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="95" y="220" text-anchor="middle" font-size="11" font-weight="800" fill="#92400e">🍗 BUBBY POT</text>
+          </g>
+
+          <!-- RIGHT: Baking Tray (Mandelbread) -->
+          <g id="trayGroup" onclick="bakeMandelbread(event)" class="cursor-pointer hover:brightness-105 transition">
+            <polygon points="222,238 240,210 376,210 390,238" fill="#cbd5e1" stroke="#64748b" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon points="230,233 244,214 370,214 382,233" fill="#f1f5f9"/>
+
+            <g id="mandelTrayStack">
+              <path d="M242,230 Q258,208 276,230 Z" fill="#d97706" stroke="#78350f" stroke-width="1.8"/>
+              <circle cx="255" cy="224" r="2" fill="#fef3c7"/>
+              <circle cx="263" cy="226" r="1.8" fill="#78350f"/>
+
+              <path d="M270,232 Q288,208 306,232 Z" fill="#f59e0b" stroke="#78350f" stroke-width="1.8"/>
+              <circle cx="285" cy="224" r="2" fill="#fef3c7"/>
+              <circle cx="292" cy="226" r="1.8" fill="#78350f"/>
+
+              <path d="M298,231 Q316,208 334,231 Z" fill="#d97706" stroke="#78350f" stroke-width="1.8"/>
+              <circle cx="313" cy="223" r="2" fill="#fef3c7"/>
+
+              <path d="M326,232 Q344,209 362,232 Z" fill="#f59e0b" stroke="#78350f" stroke-width="1.8"/>
+              <circle cx="344" cy="224" r="2" fill="#fef3c7"/>
+            </g>
+
+            <g id="extraMandelLayer1" opacity="0.25">
+              <path d="M254,221 Q272,198 290,221 Z" fill="#fbbf24" stroke="#78350f" stroke-width="1.8"/>
+              <path d="M284,222 Q302,198 320,222 Z" fill="#d97706" stroke="#78350f" stroke-width="1.8"/>
+              <path d="M314,221 Q332,198 350,221 Z" fill="#fbbf24" stroke="#78350f" stroke-width="1.8"/>
+            </g>
+            <g id="extraMandelLayer2" opacity="0">
+              <path d="M268,211 Q286,189 304,211 Z" fill="#f59e0b" stroke="#78350f" stroke-width="1.8"/>
+              <path d="M298,211 Q316,189 334,211 Z" fill="#fbbf24" stroke="#78350f" stroke-width="1.8"/>
+            </g>
+
+            <rect x="255" y="242" width="104" height="20" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+            <text x="307" y="256" text-anchor="middle" font-size="11" font-weight="800" fill="#78350f">🥖 MANDELBREAD</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Bottom Control Deck -->
+    <section class="bg-white p-4 border-t-2 border-slate-100">
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <div class="bg-amber-50/90 border border-amber-200 rounded-2xl px-3 py-2 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-bold text-amber-900">🥖 Mandelbread Baked</span>
+          <span id="mandelStat" class="text-base sm:text-lg font-extrabold text-amber-700 bg-white px-2.5 py-0.5 rounded-xl shadow-sm">0</span>
+        </div>
+        <div class="bg-rose-50/90 border border-rose-200 rounded-2xl px-3 py-2 flex items-center justify-between">
+          <span class="text-xs sm:text-sm font-bold text-rose-900">🍗 Bubby Chicken</span>
+          <span id="chickenStat" class="text-base sm:text-lg font-extrabold text-rose-700 bg-white px-2.5 py-0.5 rounded-xl shadow-sm">0</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <button id="mandelBtn" onclick="bakeMandelbread(event)"
+          class="btn-3d-amber text-white font-display text-lg sm:text-xl font-bold py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 cursor-pointer">
+          <span class="text-2xl">🥖</span>
+          <div class="text-left leading-tight">
+            <div>Bake Mandelbread</div>
+            <div class="text-xs font-sans font-bold text-amber-100">+1 Happy Tummy</div>
+          </div>
+        </button>
+
+        <button id="chickenBtn" onclick="serveChicken(event)"
+          class="btn-3d-red text-white font-display text-lg sm:text-xl font-bold py-3.5 px-5 rounded-2xl flex items-center justify-center gap-2 cursor-pointer">
+          <span class="text-2xl">🍗</span>
+          <div class="text-left leading-tight">
+            <div>Make Bubby Chicken!</div>
+            <div id="chickenSubtext" class="text-xs font-sans font-bold text-rose-100">+3 Dinner Bonus!</div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= GRAND FINALE BIRTHDAY CARD MODAL ================= -->
+    <div id="birthdayModal" class="hidden absolute inset-0 bg-gradient-to-b from-blue-900/95 via-indigo-900/95 to-purple-900/95 backdrop-blur-md z-30 flex flex-col items-center justify-between p-4 sm:p-6 text-center overflow-y-auto">
+      
+      <!-- Interactive Balloons -->
+      <div id="balloonContainer" class="w-full flex justify-around items-center pointer-events-auto my-1">
+        <div onclick="popBalloon(this, event)" class="balloon-float text-3xl sm:text-4xl select-none" title="Tap to pop!">🎈</div>
+        <div onclick="popBalloon(this, event)" class="balloon-float text-3xl sm:text-4xl select-none" style="animation-delay:0.4s" title="Tap to pop!">🎉</div>
+        <div onclick="popBalloon(this, event)" class="balloon-float text-3xl sm:text-4xl select-none" style="animation-delay:0.8s" title="Tap to pop!">🎈</div>
+        <div onclick="popBalloon(this, event)" class="balloon-float text-3xl sm:text-4xl select-none" style="animation-delay:1.2s" title="Tap to pop!">🥳</div>
+        <div onclick="popBalloon(this, event)" class="balloon-float text-3xl sm:text-4xl select-none" style="animation-delay:0.6s" title="Tap to pop!">🎈</div>
+      </div>
+
+      <!-- Birthday Card Content -->
+      <div class="bg-white rounded-3xl p-4 sm:p-6 max-w-md w-full shadow-2xl border-4 border-amber-400 my-auto relative">
+        <div class="inline-block bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full mb-1">
+          👑 QUEEN OF THE KITCHEN 👑
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 leading-tight">
+          Happy Birthday, Bubby Reva!
+        </h2>
+
+        <!-- Interactive Birthday Cake -->
+        <div class="my-2 flex flex-col items-center">
+          <p id="candlePrompt" class="text-xs font-extrabold text-rose-600 animate-pulse mb-1">
+            ✨ Tap the candles to make a wish & blow them out! ✨
+          </p>
+          <svg id="cakeSvg" onclick="blowOutCandles(event)" class="w-44 h-36 cursor-pointer overflow-visible" viewBox="0 0 200 160">
+            <ellipse cx="100" cy="145" rx="82" ry="10" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+            <rect x="35" y="92" width="130" height="50" rx="10" fill="#fde68a" stroke="#d97706" stroke-width="2.2"/>
+            <path d="M35,98 Q50,115 65,98 Q80,115 95,98 Q110,115 125,98 Q140,115 155,98 L165,98 L165,92 L35,92 Z" fill="#f43f5e"/>
+            <rect x="52" y="54" width="96" height="40" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.2"/>
+            <path d="M52,60 Q68,74 84,60 Q100,74 116,60 Q132,74 148,60 L148,54 L52,54 Z" fill="#3b82f6"/>
+            <text x="100" y="126" text-anchor="middle" font-size="16" font-weight="900" fill="#be123c" font-family="Fredoka, sans-serif">BUBBY REVA</text>
+
+            <!-- 3 Candles -->
+            <g>
+              <rect x="68" y="28" width="10" height="26" rx="3" fill="#ffffff" stroke="#ec4899" stroke-width="2"/>
+              <line x1="68" y1="36" x2="78" y2="40" stroke="#ec4899" stroke-width="2"/>
+              <line x1="68" y1="45" x2="78" y2="49" stroke="#ec4899" stroke-width="2"/>
+
+              <rect x="95" y="24" width="10" height="30" rx="3" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+              <line x1="95" y1="32" x2="105" y2="36" stroke="#3b82f6" stroke-width="2"/>
+              <line x1="95" y1="42" x2="105" y2="46" stroke="#3b82f6" stroke-width="2"/>
+
+              <rect x="122" y="28" width="10" height="26" rx="3" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+              <line x1="122" y1="36" x2="132" y2="40" stroke="#f59e0b" stroke-width="2"/>
+              <line x1="122" y1="45" x2="132" y2="49" stroke="#f59e0b" stroke-width="2"/>
+            </g>
+
+            <!-- Animated Flames -->
+            <g id="candleFlames">
+              <g class="candle-flame" transform="translate(73, 25)">
+                <path d="M0,0 C-6,-8 -4,-18 0,-22 C4,-18 6,-8 0,0 Z" fill="#f97316"/>
+                <path d="M0,-2 C-3,-7 -2,-13 0,-16 C2,-13 3,-7 0,-2 Z" fill="#fde047"/>
+              </g>
+              <g class="candle-flame" transform="translate(100, 21)">
+                <path d="M0,0 C-6,-8 -4,-18 0,-22 C4,-18 6,-8 0,0 Z" fill="#f97316"/>
+                <path d="M0,-2 C-3,-7 -2,-13 0,-16 C2,-13 3,-7 0,-2 Z" fill="#fde047"/>
+              </g>
+              <g class="candle-flame" transform="translate(127, 25)">
+                <path d="M0,0 C-6,-8 -4,-18 0,-22 C4,-18 6,-8 0,0 Z" fill="#f97316"/>
+                <path d="M0,-2 C-3,-7 -2,-13 0,-16 C2,-13 3,-7 0,-2 Z" fill="#fde047"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed mb-2">
+          <strong>Aliza</strong>, <strong>Ella</strong>, <strong>Maayan</strong>, and <strong>Yair</strong> are stuffed full of your world-famous <strong>Mandelbread</strong> and <strong>Bubby Chicken</strong>!
+        </p>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-3 text-blue-900 font-bold text-xs sm:text-sm leading-relaxed mb-4">
+          "Wishing you a happy, wonderful sweet year!" 💖
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button onclick="shareKitchenLink()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-display text-sm font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-1.5 transition">
+            <span>🔗</span> Share with Family
+          </button>
+          <button onclick="resetGame()"
+            class="btn-3d-amber flex-1 text-white font-display text-base font-bold py-2.5 px-4 rounded-xl cursor-pointer">
+            🔄 Bake Another Batch!
+          </button>
+        </div>
+      </div>
+
+      <div class="text-xs text-blue-200 font-semibold mt-2">
+        Made with love for Bubby Reva 🥖🍗🎂
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    /* =========================================================================
+       1. WEB AUDIO SYNTHESIZER
+       ========================================================================= */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+      document.getElementById('soundLabel').textContent = soundEnabled ? 'Sound On' : 'Muted';
+      if (soundEnabled) playPopSound(520);
+    }
+
+    function playPopSound(baseFreq = 440) {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(baseFreq, now);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.65, now + 0.11);
+
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.14);
+    }
+
+    function playChickenSound() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const notes = [392.00, 493.88, 587.33, 783.99]; // G major arpeggio
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.055);
+
+        gain.gain.setValueAtTime(0.18, now + idx * 0.055);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.25);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.055);
+        osc.stop(now + idx * 0.055 + 0.26);
+      });
+    }
+
+    function playBirthdayFanfare() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const melody = [
+        { f: 261.63, d: 0.22, t: 0.0 },
+        { f: 261.63, d: 0.20, t: 0.25 },
+        { f: 293.66, d: 0.40, t: 0.48 },
+        { f: 261.63, d: 0.40, t: 0.92 },
+        { f: 349.23, d: 0.40, t: 1.36 },
+        { f: 329.63, d: 0.75, t: 1.80 }
+      ];
+
+      melody.forEach(n => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(n.f, now + n.t);
+
+        gain.gain.setValueAtTime(0.22, now + n.t);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + n.t);
+        osc.stop(now + n.t + n.d + 0.02);
+      });
+    }
+
+    function playBlowOutSound() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const bufferSize = ctx.sampleRate * 0.35;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(600, now);
+      filter.frequency.exponentialRampToValueAtTime(220, now + 0.35);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.28, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start(now);
+
+      setTimeout(playBirthdayFanfare, 300);
+    }
+
+    /* =========================================================================
+       2. PARTICLE & FLYING TREAT CANVAS ENGINE
+       ========================================================================= */
+    const canvas = document.getElementById('fxCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let flyingTreats = [];
+    let confettiPieces = [];
+    let confettiActive = false;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function spawnFlyingTreat(emoji, startX, startY, onArrive) {
+      const kidBox = document.getElementById('kidAvatarBox').getBoundingClientRect();
+      const targetX = kidBox.left + kidBox.width / 2;
+      const targetY = kidBox.top + kidBox.height / 2;
+
+      flyingTreats.push({
+        emoji,
+        startX,
+        startY,
+        targetX,
+        targetY,
+        progress: 0,
+        speed: 0.045,
+        arcHeight: 95,
+        rotation: 0,
+        onArrive
+      });
+    }
+
+    function spawnBurst(x, y, text, color = '#f59e0b') {
+      particles.push({
+        type: 'text',
+        x,
+        y: y - 10,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: -2.4,
+        text,
+        color,
+        alpha: 1,
+        scale: 1
+      });
+
+      const icons = ['✨', '💛', '⭐', '🥖'];
+      for (let i = 0; i < 7; i++) {
+        const angle = (Math.PI * 2 * i) / 7 + Math.random() * 0.4;
+        const speed = 2 + Math.random() * 3.5;
+        particles.push({
+          type: 'emoji',
+          emoji: icons[i % icons.length],
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1.5,
+          alpha: 1,
+          size: 14 + Math.random() * 8
+        });
+      }
+    }
+
+    function startConfettiShower() {
+      confettiActive = true;
+      confettiPieces = [];
+      const colors = ['#f59e0b', '#ec4899', '#3b82f6', '#10b981', '#a855f7', '#ef4444'];
+      for (let i = 0; i < 85; i++) {
+        confettiPieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          w: 8 + Math.random() * 6,
+          h: 6 + Math.random() * 6,
+          color: colors[i % colors.length],
+          vy: 2.2 + Math.random() * 3,
+          vx: (Math.random() - 0.5) * 2,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.15
+        });
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = flyingTreats.length - 1; i >= 0; i--) {
+        const t = flyingTreats[i];
+        t.progress += t.speed;
+        t.rotation += 0.18;
+
+        if (t.progress >= 1) {
+          if (t.onArrive) t.onArrive(t.targetX, t.targetY);
+          flyingTreats.splice(i, 1);
+          continue;
+        }
+
+        const curX = t.startX + (t.targetX - t.startX) * t.progress;
+        const linearY = t.startY + (t.targetY - t.startY) * t.progress;
+        const parabola = -4 * t.arcHeight * t.progress * (1 - t.progress);
+        const curY = linearY + parabola;
+
+        ctx.save();
+        ctx.translate(curX, curY);
+        ctx.rotate(t.rotation);
+        ctx.font = '32px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(t.emoji, 0, 0);
+        ctx.restore();
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.024;
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        if (p.type === 'text') {
+          ctx.font = '900 22px "Fredoka", sans-serif';
+          ctx.fillStyle = p.color;
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 4;
+          ctx.textAlign = 'center';
+          ctx.strokeText(p.text, p.x, p.y);
+          ctx.fillText(p.text, p.x, p.y);
+        } else {
+          p.vy += 0.12;
+          ctx.font = `${p.size}px serif`;
+          ctx.textAlign = 'center';
+          ctx.fillText(p.emoji, p.x, p.y);
+        }
+        ctx.restore();
+      }
+
+      if (confettiActive) {
+        confettiPieces.forEach(c => {
+          c.x += c.vx;
+          c.y += c.vy;
+          c.angle += c.spin;
+          if (c.y > canvas.height + 20) {
+            c.y = -20;
+            c.x = Math.random() * canvas.width;
+          }
+          ctx.save();
+          ctx.translate(c.x, c.y);
+          ctx.rotate(c.angle);
+          ctx.fillStyle = c.color;
+          ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+          ctx.restore();
+        });
+      }
+
+      requestAnimationFrame(animateCanvas);
+    }
+    requestAnimationFrame(animateCanvas);
+
+    /* =========================================================================
+       3. GAMEPLAY STATE & KIDS QUEUE LOGIC (Aliza, Ella, Maayan, Yair)
+       ========================================================================= */
+    const GOAL_SCORE = 20;
+    let score = 0;
+    let mandelCount = 0;
+    let chickenCount = 0;
+    let needsChicken = false;
+    let candlesLit = true;
+
+    const kidsRoster = [
+      { emoji: '👧', name: 'Aliza' },
+      { emoji: '👧🏻', name: 'Ella' },
+      { emoji: '🧒', name: 'Maayan' },
+      { emoji: '👦', name: 'Yair' }
+    ];
+    let currentKidIndex = 0;
+
+    const mandelQuotes = [
+      '"Bubby! Can you make us your famous Mandelbread?"',
+      '"Thank you, Bubby! Save the crunchy end pieces for me!"',
+      '"Bubby, can I take an extra tin of Mandelbread home?"',
+      '"Nobody bakes Mandelbread like our Bubby!"',
+      '"Mmm! Bubby, your Mandelbread is the best in the world!"'
+    ];
+
+    const chickenQuotes = [
+      '"Bubby! We\'re hungry for dinner—make us Bubby Chicken!"',
+      '"Bubby, please! We smell your famous Bubby Chicken cooking!"',
+      '"Dinnertime! Can we have some hot Bubby Chicken, Bubby?"'
+    ];
+
+    function rotateKid() {
+      currentKidIndex = (currentKidIndex + 1) % kidsRoster.length;
+      const kid = kidsRoster[currentKidIndex];
+      const box = document.getElementById('kidAvatarBox');
+      document.getElementById('kidEmoji').textContent = kid.emoji;
+      document.getElementById('kidName').textContent = kid.name;
+
+      box.classList.remove('kid-pop');
+      void box.offsetWidth;
+      box.classList.add('kid-pop');
+    }
+
+    function triggerRevaAnimation(animClass) {
+      const charGroup = document.getElementById('revaCharacter');
+      const sceneSvg = document.getElementById('revaSceneSvg');
+
+      charGroup.classList.remove('reva-bounce');
+      sceneSvg.classList.remove('stir-anim', 'toss-anim');
+      void charGroup.offsetWidth;
+
+      charGroup.classList.add('reva-bounce');
+      sceneSvg.classList.add(animClass);
+    }
+
+    function updateKitchenVisuals() {
+      document.getElementById('mandelStat').textContent = mandelCount;
+      document.getElementById('chickenStat').textContent = chickenCount;
+
+      const clampedScore = Math.min(score, GOAL_SCORE);
+      const pct = Math.round((clampedScore / GOAL_SCORE) * 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('scoreText').textContent = `${clampedScore} / ${GOAL_SCORE} Happy Tummies`;
+
+      document.getElementById('extraMandelLayer1').setAttribute('opacity', mandelCount >= 3 ? '1' : '0.25');
+      document.getElementById('extraMandelLayer2').setAttribute('opacity', mandelCount >= 7 ? '1' : '0');
+
+      const chickenBtn = document.getElementById('chickenBtn');
+      const badge = document.getElementById('cravingBadge');
+      const tag = document.getElementById('cravingTag');
+
+      if (needsChicken) {
+        chickenBtn.classList.add('glow-urgent');
+        badge.textContent = '🍗';
+        badge.className = 'absolute -top-2 -right-2 bg-rose-600 text-white text-sm w-7 h-7 rounded-full flex items-center justify-center shadow border-2 border-white animate-bounce';
+        tag.textContent = '🍗 Craving Bubby Chicken!';
+        tag.className = 'text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-100 text-rose-800';
+      } else {
+        chickenBtn.classList.remove('glow-urgent');
+        badge.textContent = '🥖';
+        badge.className = 'absolute -top-2 -right-2 bg-amber-500 text-white text-sm w-7 h-7 rounded-full flex items-center justify-center shadow border-2 border-white animate-bounce';
+        tag.textContent = '🥖 Craving Mandelbread';
+        tag.className = 'text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-800';
+      }
+
+      if (score >= GOAL_SCORE) {
+        setTimeout(showBirthdayFinale, 450);
+      }
+    }
+
+    function handleKidTap() {
+      if (needsChicken) {
+        serveChicken();
+      } else {
+        bakeMandelbread();
+      }
+    }
+
+    function bakeMandelbread(evt) {
+      if (score >= GOAL_SCORE) return;
+
+      playPopSound(440 + (mandelCount % 5) * 35);
+      triggerRevaAnimation('toss-anim');
+
+      const trayRect = document.getElementById('trayGroup').getBoundingClientRect();
+      const startX = evt && evt.clientX ? evt.clientX : trayRect.left + trayRect.width / 2;
+      const startY = evt && evt.clientY ? evt.clientY : trayRect.top + 20;
+
+      mandelCount++;
+      score += 1;
+
+      if (mandelCount % 4 === 0 && score < GOAL_SCORE) {
+        needsChicken = true;
+        document.getElementById('speechText').textContent =
+          chickenQuotes[Math.floor(Math.random() * chickenQuotes.length)];
+      } else if (!needsChicken) {
+        document.getElementById('speechText').textContent =
+          mandelQuotes[mandelCount % mandelQuotes.length];
+      }
+
+      spawnFlyingTreat('🥖', startX, startY, (tx, ty) => {
+        spawnBurst(tx, ty, '+1 Mandelbread!', '#d97706');
+        rotateKid();
+      });
+
+      updateKitchenVisuals();
+    }
+
+    function serveChicken(evt) {
+      if (score >= GOAL_SCORE) return;
+
+      playChickenSound();
+      triggerRevaAnimation('stir-anim');
+
+      const potRect = document.getElementById('potGroup').getBoundingClientRect();
+      const startX = evt && evt.clientX ? evt.clientX : potRect.left + potRect.width / 2;
+      const startY = evt && evt.clientY ? evt.clientY : potRect.top + 20;
+
+      chickenCount++;
+      const bonus = needsChicken ? 3 : 2;
+      score += bonus;
+      needsChicken = false;
+
+      document.getElementById('speechText').textContent =
+        '"YUM! Nobody makes Bubby Chicken like our Bubby!"';
+
+      spawnFlyingTreat('🍗', startX, startY, (tx, ty) => {
+        spawnBurst(tx, ty, `+${bonus} Bubby Chicken!`, '#e11d48');
+        rotateKid();
+      });
+
+      updateKitchenVisuals();
+    }
+
+    /* =========================================================================
+       4. SHAREABLE LINK FEATURE (Fallback compatible clipboard copy)
+       ========================================================================= */
+    function shareKitchenLink() {
+      const shareUrl = window.location.href;
+      
+      // Safe fallback copy
+      const tempInput = document.createElement('input');
+      tempInput.value = shareUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+      } catch (e) {
+        console.warn('Fallback copy failed', e);
+      }
+      document.body.removeChild(tempInput);
+
+      // Visual toast notification
+      const toast = document.getElementById('shareToast');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+
+      playPopSound(600);
+    }
+
+    /* =========================================================================
+       5. GRAND FINALE BIRTHDAY CARD & INTERACTIVE CANDLES
+       ========================================================================= */
+    function showBirthdayFinale() {
+      const modal = document.getElementById('birthdayModal');
+      if (!modal.classList.contains('hidden')) return;
+
+      modal.classList.remove('hidden');
+      startConfettiShower();
+      playBirthdayFanfare();
+    }
+
+    function blowOutCandles(evt) {
+      if (!candlesLit) return;
+      candlesLit = false;
+
+      const flames = document.getElementById('candleFlames');
+      flames.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      flames.style.opacity = '0';
+      flames.style.transform = 'scale(0.2)';
+
+      document.getElementById('candlePrompt').textContent =
+        '🎉 Hurray! Happy Birthday, Bubby Reva!! 🎉';
+      document.getElementById('candlePrompt').classList.remove('animate-pulse');
+
+      const cakeRect = document.getElementById('cakeSvg').getBoundingClientRect();
+      spawnBurst(
+        cakeRect.left + cakeRect.width / 2,
+        cakeRect.top + 30,
+        '🎂 WISH GRANTED! 💖',
+        '#ec4899'
+      );
+
+      playBlowOutSound();
+    }
+
+    function popBalloon(el, evt) {
+      if (el.style.opacity === '0') return;
+      playPopSound(680);
+      const rect = el.getBoundingClientRect();
+      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 'POP! 🎉', '#3b82f6');
+      el.style.transition = 'transform 0.15s ease, opacity 0.15s ease';
+      el.style.transform = 'scale(1.6)';
+      el.style.opacity = '0';
+    }
+
+    function resetGame() {
+      score = 0;
+      mandelCount = 0;
+      chickenCount = 0;
+      needsChicken = false;
+      candlesLit = true;
+      confettiActive = false;
+      confettiPieces = [];
+
+      const flames = document.getElementById('candleFlames');
+      flames.style.opacity = '1';
+      flames.style.transform = 'scale(1)';
+      document.getElementById('candlePrompt').textContent =
+        '✨ Tap the candles to make a wish & blow them out! ✨';
+      document.getElementById('candlePrompt').classList.add('animate-pulse');
+
+      document.querySelectorAll('#balloonContainer > div').forEach(b => {
+        b.style.opacity = '1';
+        b.style.transform = '';
+      });
+
+      document.getElementById('speechText').textContent =
+        '"Bubby! Can you make us your famous Mandelbread?"';
+      document.getElementById('birthdayModal').classList.add('hidden');
+
+      updateKitchenVisuals();
+      playPopSound(520);
+    }
+  </script>
+</body>
+</html>
